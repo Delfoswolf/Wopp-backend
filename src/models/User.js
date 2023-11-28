@@ -12,7 +12,15 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    // WP: Admin, Editor, Publisher, Collaborator, Register
+    address : {
+        type: String,
+        require: true,
+    },
+    phone: {
+        type: String,
+        require: true
+    },
+        // WP: Admin, Editor, Publisher, Collaborator, Register
     // Forma sencilla de roles de usuarios.
     role: {
         type: String,

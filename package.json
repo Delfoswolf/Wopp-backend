@@ -1,12 +1,12 @@
 {
-  "name": "ecommerce",
+  "name": "wopp-backend",
   "version": "1.0.0",
   "description": "API Rest Ecommerce",
   "main": "app.js",
   "scripts": {
     "dev": "nodemon ./src/app.js"
   },
-  "author": "Juan Carlos Jimenez Gutierrez",
+  "author": "Jefferson Chauta",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
