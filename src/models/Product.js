@@ -39,5 +39,5 @@ const ProductModel = model(
 );
 
 
-module.exports = ProductModel;
+module.exports = ProductModel, { ProductSchema };
 

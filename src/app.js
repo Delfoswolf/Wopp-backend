@@ -19,7 +19,7 @@ app.use(
     require( './routes/products.routes' )   // Importa el archivo de rutas para esta ruta '/api/products'
 );    
 app.use( '/api/categories', require( './routes/category.routes' ) );
-
+app.use( '/api/order', require( './routes/order.routes' ) );
 
 dbConection();      // Invoca la configuracion de DB, es decir: Pone a funcionar la BD
 
