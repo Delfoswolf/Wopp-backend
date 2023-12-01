@@ -6,10 +6,6 @@ const OrderSchema = new Schema({
         type: String,
         required: true
     },
-    idRetailer: {
-        type: String,
-        required: true
-    },
     productList: {
         type: Array,
         required: true,

@@ -26,6 +26,11 @@ const ProductSchema = new Schema({
     userId: {           // El creador del producto
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        required: true,
+        default: "Available"
     }
 }, {
     // Define las configuraciones que deseamos para aplicar a este objeto en Mongoose 
