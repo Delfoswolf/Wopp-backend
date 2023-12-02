@@ -1,31 +1,39 @@
-const { registerOrder } = require("../services/order.service");
+const OrderModel = require("../models/Order");
+const ProductModel = require("../models/Product");
+const { registerOrder, getExistingProducts } = require("../services/order.service");
 
 
 const createOrder = async ( req, res ) => {
     const inputData = req.body;
     const role = req.authUser.role;
 
-    if(role != "customer") {
-        return res.json({ok: false, msg: "Favor usar perfil de cliente para comprar productos."})
-    } 
-
-    inputData.idCustomer = req.authUser._id;
-
     try {
-        const data = await registerOrder( inputData );
-        res.status( 201 ).json({
-            ok: true,
-            data
-        });
+        if(role != "customer") {
+            return res.json({ok: false, msg: "Favor usar perfil de cliente para comprar productos."})
+        } 
+    
+        inputData.idCustomer = req.authUser._id;
+    
+        if( inputData.productListIds.length === 0 ) {
+            return res.json({ ok: false, msg: 'Registe al menos un producto en esta orden' })
+        } 
+    
+        const productList = await ProductModel.find({ _id: { $in: inputData.productListIds}});
 
-    } catch ( error ) {
+        inputData.productList = productList;
+        delete inputData.productListIds;
+
+        const dbOrder = new OrderModel( inputData );
+
+        const saveData = await dbOrder.save();
+
+        res.json({ ok: true, data: saveData })
+
+    } catch (error) {
         console.error( error );
-        res.status ( 500 ).json({
-            ok: false,
-            msg: 'Error al crear la orden'
-        });
-
+        res.json({ ok: false, msg: 'Error al crear la orden' })
     }
+       
 }
 
 module.exports = {

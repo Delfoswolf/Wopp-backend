@@ -3,6 +3,8 @@ const ProductModel = require("../models/Product");
 
 
 async function getExistingProducts( productIds ) {
+
+    console.log( productIds );
     return await ProductModel.find({ _id: { $in: productIds }});
 }
 
