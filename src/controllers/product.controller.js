@@ -1,4 +1,4 @@
-const { registerProduct, getAllProducts, getOneProductById, removeOneProductById, updateOneProductById } = require("../services/product.service");
+const { registerProduct, getAllProducts, getOneProductById, removeOneProductById, updateOneProductById, getAllProductsByCategory } = require("../services/product.service");
 
 
 const createProduct = async ( req, res ) => {
@@ -106,11 +106,34 @@ const updateProductById = async ( req, res ) => {
     }
 }
 
+const getProductsByCategory = async ( req, res ) => {
+
+    const category = req.params.category;
+    console.log( req.authUser );
+
+    try {
+        const data = await getAllProductsByCategory( category );
+
+        res.status( 200 ).json({
+            ok: true,
+            data
+        });
+    } 
+    catch( error ) {
+        console.error( error );
+        res.status( 500 ).json({
+            ok: false,
+            msg: 'Error al obtener todos los productos por categoría'
+        })
+    }
+    
+}
 
 module.exports = {
     createProduct, 
     getProducts, 
     getProductById,
     removeProductById,
-    updateProductById
+    updateProductById,
+    getProductsByCategory
 }

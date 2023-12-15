@@ -25,11 +25,15 @@ async function updateOneProductById( id, updatedProduct ) {
     );
 }
 
+async function getAllProductsByCategory( category ) {
+    return await ProductModel.find({ category });
+}
 
 module.exports = {
     registerProduct, 
     getAllProducts, 
     getOneProductById,
     removeOneProductById, 
-    updateOneProductById
+    updateOneProductById,
+    getAllProductsByCategory
 }
